@@ -117,3 +117,18 @@ groups:
 ansible --version
 ansible all -i /opt/ansible/inventory/aws_ec2.yml -m ping
 
+
+**Your S3 bucket has versioning enabled:**
+Best fix (Terraform way)
+Modify your S3 bucket resource:
+resource "aws_s3_bucket" "one" {
+  bucket        = "aravind.sushmaranidas1.k8s"
+  force_destroy = true
+}
+
+**If you want to delete immediately without Terraform change**
+**Run:**
+aws s3 rm s3://aravind.sushmaranidas1.k8s --recursive
+**Then remove versions:**
+aws s3api list-object-versions \
+--bucket aravind.sushmaranidas1.k8s
