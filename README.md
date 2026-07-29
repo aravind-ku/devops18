@@ -68,6 +68,36 @@ pipeline {
 }
 
 
+**YOU CAN ALSO GIVE CODE FOR SLACK NOTIFATION:**
+
+post {
+    always {
+        script {
+            def color = currentBuild.currentResult == "SUCCESS" ? "good" : "danger"
+
+            slackSend(
+                channel: "#devops",
+                color: color,
+                message: """
+                    🚀 *Jenkins Pipeline Notification*
+                    
+                    📂 *Project:* ${env.JOB_NAME}
+                    🔢 *Build:* #${env.BUILD_NUMBER}
+                    📌 *Status:* ${currentBuild.currentResult}
+                    🌿 *Branch:* ${env.BRANCH_NAME ?: 'main'}
+                    👤 *Triggered By:* ${currentBuild.rawBuild.getCause(hudson.model.Cause.UserIdCause)?.getUserName() ?: 'Automated'}
+                    
+                    🔗 *Build URL:*
+                    ${env.BUILD_URL}
+                    
+                    ━━━━━━━━━━━━━━━━━━━━
+                    """
+            )
+        }
+    }
+}
+
+
 cd /etc/ansible/
 ll
 vim ansible.cfg
