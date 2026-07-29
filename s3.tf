@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "one" {
-  bucket = "aravind.sushmaranidas.k8s"
+  bucket = "aravind.sushmaranidas1.k8s"
 }
 
 resource "aws_s3_bucket_ownership_controls" "two" {
