@@ -22,10 +22,4 @@ versioning_configuration {
 status = "Enabled"
 }
 }
-terraform {
-backend "s3" {
-region = "ap-south-1"
-bucket = "aravind.sushmaranidas.k8s"
-key = "prod/terraform.tfstate"
-}
-}
+
